@@ -367,7 +367,7 @@ During deployment, Elastic may generate sensitive values such as:
 - enrollment tokens
 - verification codes
 
-These values should not be exposed in public documentation or committed to a public repository.
+These values should not be exposed in public documentation or committed to a public repository. (so there are no screenshots)
 
 Sensitive setup information from the lab has therefore been intentionally excluded from this project.
 
