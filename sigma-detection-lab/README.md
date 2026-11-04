@@ -1,4 +1,4 @@
-# Sigma Detection Engineering Lab — SigHunt
+# Sigma Detection Engineering Lab - SigHunt (challenge)
 
 ## Overview
 
