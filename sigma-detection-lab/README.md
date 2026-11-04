@@ -33,7 +33,7 @@ This is an educational project. It is not a production-ready detection pack.
 
 1. Read each attack log and identify suspicious activity.
 2. Check which event fields are available in the validator.
-3. Choose fields such as `EventID`, `Image`, `ParentImage`, `CommandLine`, or `TargetFilename`.
+3. Choose fields such as `EventID`, `Image`, `ParentImage`, `CommandLine`, or `TargetFilename`
 4. Write a `selection` with Sigma operators such as `endswith` and `contains`.
 5. Validate the rule and adjust it when needed.
 
