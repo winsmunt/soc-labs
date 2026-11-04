@@ -1,0 +1,15 @@
+title: Netcat Execution With Cmd
+description: 'Detects nc.exe launching cmd.exe, as shown in the lab reverse-shell event.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'nc.exe'
+    CommandLine|contains: 'cmd.exe'
+  condition: selection
+falsepositives:
+  - 'The validated lab rule also checked a hash. The full hash was cut off in the PDF, so this published rule is a simplified adaptation and was not independently revalidated.'
+level: medium

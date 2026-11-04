@@ -1,0 +1,15 @@
+title: Suspicious Mshta Launched by Chrome
+description: 'Detects mshta.exe launched by Chrome, as observed in the SigHunt attack log.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'mshta.exe'
+    ParentImage|endswith: 'chrome.exe'
+  condition: selection
+falsepositives:
+  - 'Process start with browser parent; this pattern may also occur in legitimate workflows.'
+level: medium

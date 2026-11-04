@@ -1,0 +1,15 @@
+title: Service Configuration Using Sc
+description: 'Detects sc.exe command lines containing cmd.exe, as observed in the service modification scenario.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'sc.exe'
+    CommandLine|contains: 'cmd.exe'
+  condition: selection
+falsepositives:
+  - 'The rule does not verify a specific service name or binPath modification.'
+level: medium

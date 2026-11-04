@@ -1,0 +1,15 @@
+title: PowerShell DownloadString Activity
+description: 'Detects PowerShell activity containing downloadstring, used in the lab to run PowerUp.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'powershell.exe'
+    CommandLine|contains: 'downloadstring'
+  condition: selection
+falsepositives:
+  - 'DownloadString is not always malicious; this is a broad heuristic.'
+level: medium

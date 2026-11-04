@@ -1,0 +1,15 @@
+title: Curl Data Argument
+description: 'Detects curl.exe command lines containing -d as observed in the lab.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'curl.exe'
+    CommandLine|contains: '-d'
+  condition: selection
+falsepositives:
+  - 'The -d argument is common in legitimate API requests; this detection needs tuning.'
+level: medium

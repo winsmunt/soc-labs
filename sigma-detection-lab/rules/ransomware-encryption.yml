@@ -1,0 +1,14 @@
+title: File Creation In Finance Path
+description: 'Detects Sysmon file creation with Finance in the target filename, used by the ransomware lab.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 11
+    TargetFilename|contains: 'Finance'
+  condition: selection
+falsepositives:
+  - 'Finance is a lab-specific folder/filename marker, not an encryption indicator. A stronger rule should focus on the observed .huntme extension and multiple renames.'
+level: medium

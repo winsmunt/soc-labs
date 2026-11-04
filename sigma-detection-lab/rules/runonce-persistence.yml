@@ -1,0 +1,15 @@
+title: Registry Command Involving Cmd
+description: 'Detects reg.exe command lines containing cmd.exe in the RunOnce persistence scenario.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'reg.exe'
+    CommandLine|contains: 'cmdd.exe'
+  condition: selection
+falsepositives:
+  - 'The lab screenshot uses cmdd.exe; this is preserved exactly. The rule does not specifically check the RunOnce key.'
+level: medium

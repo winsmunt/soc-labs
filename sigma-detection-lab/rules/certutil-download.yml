@@ -1,0 +1,15 @@
+title: Certutil URL Cache Download
+description: 'Detects certutil.exe with the -urlcache argument observed in the lab.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: 'certutil.exe'
+    CommandLine|contains: '-urlcache'
+  condition: selection
+falsepositives:
+  - 'Certutil can be used for legitimate certificate tasks.'
+level: medium

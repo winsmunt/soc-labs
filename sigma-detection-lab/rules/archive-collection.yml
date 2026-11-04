@@ -1,0 +1,15 @@
+title: 7-Zip Exfil Archive Command
+description: 'Detects 7z.exe command lines containing exfil, as observed in the collection scenario.'
+status: experimental
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: '7z.exe'
+    CommandLine|contains: 'exfil'
+  condition: selection
+falsepositives:
+  - 'The word exfil is lab-specific and will miss differently named archives.'
+level: medium
