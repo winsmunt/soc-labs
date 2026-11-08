@@ -1,4 +1,4 @@
-# Sigma Rules — TryHackMe DetectMare
+# Sigma Rules - TryHackMe DetectMare
 
 Five experimental rules transcribed from final lab diffs and normalized into standalone YAML documents. The original simulated pull requests list a fictional scenario author; these files identify the lab origin and the learner's tuning work instead.
 
