@@ -34,7 +34,7 @@ The exercise described these attack stages:
 
 The searches used for the screenshots are saved in [`queries/`](queries/). They were **reconstructed after the lab** from the final rules and attack indicators, not recovered verbatim from my earlier search history, because i forgot to document this part (splunk queries).
 
-## 1. Suspicious Office Execution — PR #1
+## 1. Suspicious Office Execution - PR #1
 
 I looked for Office applications starting command interpreters or other Windows binaries. In the Splunk data, a Word document was followed by `cmd.exe`, which used `certutil` to download a file. I also found a normal Excel finance task, where `cmd.exe` ran `monthend_report.bat`.
 
@@ -44,7 +44,7 @@ This comparison was important. A filter based only on a trusted script name coul
 
 ![Office command line comparison](images/office-commandline-analysis.png)
 
-## 2. Signed Binary Proxy Execution — PR #2
+## 2. Signed Binary Proxy Execution - PR #2
 
 The next rule looked for `rundll32.exe` and `regsvr32.exe` working with `.dll`, `.dat`, or `.tmp` files from locations such as `AppData` and `ProgramData`.
 
@@ -52,7 +52,7 @@ The logs also contained normal activity, including the research deployment tool 
 
 ![Signed binary proxy and legitimate events](images/signed-binary-proxy-analysis.png)
 
-## 3. LSASS Memory Access — PR #3
+## 3. LSASS Memory Access - PR #3
 
 I reviewed process-access events targeting `lsass.exe`. The suspicious example used `rundll32.exe` and had `comsvcs.dll` in the call trace. The dataset also included normal access from ResearchEDR, ResearchPAM, and Windows Error Reporting.
 
@@ -62,7 +62,7 @@ I improved the rule so it could look at both **call trace modules** and **access
 
 ![Comparison with known internal processes](images/lsass-benign-activity-comparison.png)
 
-## 4. Pass-the-Hash and Remote Service Installation — PR #4
+## 4. Pass-the-Hash and Remote Service Installation - PR #4
 
 The scenario included an NTLM network logon to a classified file server and a service installation on the target. In Splunk, I found this candidate event:
 
@@ -85,7 +85,7 @@ The exercise also identified a new service named `WinHelpSvc` with a file path u
 
 **Detection limitation:** the Sigma `1 of selection_*` condition alerts on an individual event. It does **not** automatically connect a specific NTLM logon and a later service installation into one correlated incident.
 
-## 5. Collection and Archive Staging — PR #5
+## 5. Collection and Archive Staging - PR #5
 
 The attacker used archiving tools to collect CAD design files. The logs showed a suspicious RAR command under `m.okafor`, while approved nightly backups used 7-Zip under `svc_backup`. Other normal activity included SOLIDWORKS auto-backup.
 
