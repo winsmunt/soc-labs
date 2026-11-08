@@ -1,0 +1,5 @@
+index=* (EventCode=1 OR EventID=1)
+(Image="*rundll32.exe" OR Image="*regsvr32.exe")
+(CommandLine="*.dll*" OR CommandLine="*.dat*" OR CommandLine="*.tmp*")
+| table _time ComputerName Image ParentImage CommandLine
+| sort _time

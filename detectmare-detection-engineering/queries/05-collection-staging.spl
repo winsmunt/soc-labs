@@ -1,0 +1,4 @@
+index=* (EventCode=1 OR EventID=1)
+(CommandLine="*.sldprt*" OR CommandLine="*.catpart*" OR CommandLine="*.dwg*" OR CommandLine="*Compress-Archive*" OR CommandLine="*exfil*")
+| table _time ComputerName User Image ParentImage CommandLine
+| sort _time

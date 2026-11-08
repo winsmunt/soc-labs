@@ -1,0 +1,5 @@
+index=* EventCode=4624 AuthenticationPackageName="NTLM" LogonType=3 KeyLength=0
+| search NOT WorkstationName="MES-LEGACY01"
+| search NOT TargetUserName="svc_cluster"
+| table _time ComputerName TargetUserName WorkstationName IpAddress AuthenticationPackageName LogonType KeyLength
+| sort _time

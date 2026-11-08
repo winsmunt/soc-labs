@@ -1,0 +1,5 @@
+index=* (EventCode=1 OR EventID=1)
+(ParentImage="*WINWORD.EXE" OR ParentImage="*EXCEL.EXE" OR ParentImage="*OUTLOOK.EXE" OR ParentImage="*POWERPNT.EXE")
+(Image="*cmd.exe" OR Image="*powershell.exe" OR Image="*pwsh.exe" OR Image="*mshta.exe" OR Image="*regsvr32.exe")
+| table _time ComputerName User ParentImage ParentCommandLine Image CommandLine
+| sort _time

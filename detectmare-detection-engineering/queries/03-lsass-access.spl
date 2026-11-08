@@ -1,0 +1,3 @@
+index=* (EventCode=10 OR EventID=10) TargetImage="*lsass.exe"
+| table _time ComputerName SourceImage TargetImage GrantedAccess CallTrace
+| sort _time
