@@ -32,7 +32,7 @@ The exercise described these attack stages:
 | #4 | Lateral movement | NTLM logon indicators or a suspicious new service | [Lateral movement](rules/lateral_movement.yml) |
 | #5 | Collection and staging | CAD files are archived for possible exfiltration | [Archive staging](rules/staging_archive.yml) |
 
-The searches used for the screenshots are saved in [`queries/`](queries/). They were **reconstructed after the lab** from the final rules and attack indicators, not recovered verbatim from my earlier search history.
+The searches used for the screenshots are saved in [`queries/`](queries/). They were **reconstructed after the lab** from the final rules and attack indicators, not recovered verbatim from my earlier search history, because i forgot to document this part (splunk queries).
 
 ## 1. Suspicious Office Execution — PR #1
 
