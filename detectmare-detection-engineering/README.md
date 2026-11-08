@@ -1,4 +1,4 @@
-# DetectMare — Detection Engineering Lab
+# DetectMare - Detection Engineering Lab
 
 **TryHackMe SOC Level 2 · Detection Engineering for SOC**  
 **Focus:** Splunk investigations, Sigma rule development, detection tuning, and simulated Red Team testing.
@@ -133,7 +133,7 @@ The screenshots below show the training validator results for each pull request.
 
 ## Lab Source
 
-[TryHackMe — DetectMare](https://tryhackme.com/room/detectmare)
+[TryHackMe - DetectMare](https://tryhackme.com/room/detectmare)
 
 ---
 
