@@ -1,0 +1,35 @@
+title: Signed Binary Proxy Execution of NetTraveler Dropper
+status: experimental
+author: 'TryHackMe DetectMare training scenario; adapted from lab work by winsmunt'
+description: >-
+  Flag signed Windows proxy execution binaries loading DLL, DAT, or TMP files from staging paths, with narrow lab-specific exclusions.
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_proxy:
+    Image|endswith:
+      - '\rundll32.exe'
+      - '\regsvr32.exe'
+  selection_extension:
+    CommandLine|contains:
+      - '.dll'
+      - '.dat'
+      - '.tmp'
+  selection_staging:
+    CommandLine|contains:
+      - '\AppData\Roaming\'
+      - '\AppData\Local\Temp\'
+      - '\ProgramData\'
+  filter_deployment:
+    ParentImage|endswith: '\researchdeploy.exe'
+    CommandLine|contains: '\ResearchIT\pkg\'
+  filter_license:
+    Image|endswith: '\regsvr32.exe'
+    ParentImage|endswith: '\sldworks.exe'
+    CommandLine|contains: 'LicenseCheck'
+  filter_wer:
+    Image|endswith: '\rundll32.exe'
+    ParentImage|endswith: '\svchost.exe'
+    CommandLine|contains: '\Microsoft\Windows\WER\Report.dll'
+  condition: selection_proxy and selection_extension and selection_staging and not 1 of filter_*

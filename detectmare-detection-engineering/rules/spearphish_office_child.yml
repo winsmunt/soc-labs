@@ -1,0 +1,30 @@
+title: Suspicious Office Child Process
+status: experimental
+author: 'TryHackMe DetectMare training scenario; adapted from lab work by winsmunt'
+description: >-
+  Office application starts a script interpreter or proxy execution tool. The finance automation exception requires the known Excel template and script path.
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_parent:
+    ParentImage|endswith:
+      - '\WINWORD.EXE'
+      - '\EXCEL.EXE'
+      - '\OUTLOOK.EXE'
+      - '\POWERPNT.EXE'
+  selection_child:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\pwsh.exe'
+      - '\mshta.exe'
+      - '\regsvr32.exe'
+  filter_finance:
+    ParentImage|endswith: '\EXCEL.EXE'
+    Image|endswith: '\cmd.exe'
+    ParentCommandLine|contains: 'C:\Finance\MonthEnd_Template.xlsm'
+    CommandLine|contains|all:
+      - 'C:\ProgramData\ResearchIT\Automation\'
+      - 'monthend_report.bat'
+  condition: selection_parent and selection_child and not filter_finance

@@ -1,0 +1,42 @@
+title: Classified Design File Collection and Staging
+status: experimental
+author: 'TryHackMe DetectMare training scenario; adapted from lab work by winsmunt'
+description: >-
+  Lab rule for CAD-file collection and archive creation. The final validated condition omits exclusions that previously caused a missed Red Team test.
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection_1:
+    ParentImage|endswith: 'cmd.exe'
+    CommandLine|contains:
+      - '*.sldprt'
+      - '*.catpart'
+      - '*.dwg'
+      - '7z.exe'
+      - 'rar'
+      - 'Compress-Archive'
+  selection_2:
+    ParentImage|endswith:
+      - 'cmd.exe'
+      - 'powershell.exe'
+      - 'pwsh.exe'
+    Image|endswith:
+      - 'cmd.exe'
+      - 'powershell.exe'
+      - 'pwsh.exe'
+    CommandLine|contains:
+      - '*.sldprt'
+      - '*.catpart'
+      - '*.dwg'
+      - '.zip'
+      - '-Path'
+      - 'Compress-Archive'
+  selection_3:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+    CommandLine|contains: 'Compress-Archive'
+  # During tuning, filter_* blocks were removed from the active condition.
+  # Environment validation and all three simulated bypass tests passed with:
+  condition: 1 of selection_*

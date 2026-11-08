@@ -1,0 +1,28 @@
+title: Pass-the-Hash and Remote Service Installation
+status: experimental
+author: 'TryHackMe DetectMare training scenario; adapted from lab work by winsmunt'
+description: >-
+  Identify lab indicators of NTLM hash-replay-like logons and suspicious remote service installations. These independent single-event matches do not correlate logon and service events.
+logsource:
+  product: windows
+  # Event 4624 (Security) and 7045 (System) are combined in the THM exercise.
+detection:
+  selection_1:
+    EventID: 4624
+    AuthenticationPackageName: 'NTLM'
+    LogonType: 3
+    KeyLength: 0
+  selection_2:
+    EventID: 7045
+    ServiceFileName|contains: '.dat'
+  selection_3:
+    EventID: 7045
+    ServiceFileName|contains:
+      - '-enc'
+      - '-EncodedCommand'
+      - 'FromBase64String'
+  filter_legacy:
+    WorkstationName: 'MES-LEGACY01'
+  filter_cluster:
+    TargetUserName: 'svc_cluster'
+  condition: 1 of selection_* and not 1 of filter_*
